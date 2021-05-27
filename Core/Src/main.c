@@ -60,8 +60,8 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-uint8_t rxBuffer[1];		//÷∏¡Óª∫¥Ê«¯
-#define RX_CMD_LEN 1	//Ω” ’÷∏¡Ó≥§∂»
+uint8_t rxBuffer[1];		//Êåá‰ª§ÁºìÂ≠òÂå∫
+#define RX_CMD_LEN 1	//Êé•Êî∂Êåá‰ª§ÈïøÂ∫¶
 /* USER CODE END 0 */
 
 /**
@@ -71,21 +71,13 @@ uint8_t rxBuffer[1];		//÷∏¡Óª∫¥Ê«¯
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-	uint16_t Temperature_Value;//Œ¬∂»≤…ºØ÷µ
-	uint16_t Humidity_Value;// ™∂»≤…ºØ÷µ
+	uint16_t Temperature_Value;//Ê∏©Â∫¶ÈááÈõÜÂÄº
+	uint16_t Humidity_Value;//ÊπøÂ∫¶ÈááÈõÜÂÄº
 	
-	int Integer_Value_Temp;//Œ¬∂»’˚ ˝≤ø∑÷
-	int Decimal_Value_Temp;//Œ¬∂»–° ˝≤ø∑÷
-	int Integer_Value_Humi;// ™∂»’˚ ˝≤ø∑÷
-	int Decimal_Value_Humi;// ™∂»–° ˝≤ø∑÷
-	
-//	uint8_t Deposit_value_1[100];//Œ¬∂»’˚ ˝‘›¥Ê
-//	uint8_t Deposit_value_2[50];//Œ¬∂»’˚ ˝‘›¥Ê
-//	uint8_t Deposit_value_3[100];//Œ¬∂»’˚ ˝‘›¥Ê
-//	uint8_t Deposit_value_4[50];//Œ¬∂»’˚ ˝‘›¥Ê
-	
-//	int i =0;
-//	int j =0;
+	int Integer_Value_Temp;//Ê∏©Â∫¶Êï¥Êï∞ÈÉ®ÂàÜ
+	int Decimal_Value_Temp;//Ê∏©Â∫¶Â∞èÊï∞ÈÉ®ÂàÜ
+	int Integer_Value_Humi;//ÊπøÂ∫¶Êï¥Êï∞ÈÉ®ÂàÜ
+	int Decimal_Value_Humi;//ÊπøÂ∫¶Â∞èÊï∞ÈÉ®ÂàÜ
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -113,29 +105,29 @@ int main(void)
   /* USER CODE BEGIN 2 */
 	while(DHT11_Init())
 	{
-		printf("DHT11Ω”»Î ß∞‹£¨«Î÷ÿ ‘£°\r\n");
+		printf("DHT11Êé•ÂÖ•Â§±Ë¥•ÔºåËØ∑ÈáçËØïÔºÅ\r\n");
 		HAL_Delay(500);
 	}
 	
 	OLED_Init();
 	OLED_Clear();
 	
-	OLED_ShowChinese(16,0,0);/*"µ±",0*/
-	OLED_ShowChinese(32,0,1);/*"«∞",1*/
-	OLED_ShowChinese(48,0,2);/*" µ",2*/
-	OLED_ShowChinese(64,0,3);/*" ±",3*/
-	OLED_ShowChinese(80,0,4);/*" ˝",4*/
-	OLED_ShowChinese(96,0,5);/*"æ›",5*/
+	OLED_ShowChinese(16,0,0);/*"ÂΩì",0*/
+	OLED_ShowChinese(32,0,1);/*"Ââç",1*/
+	OLED_ShowChinese(48,0,2);/*"ÂÆû",2*/
+	OLED_ShowChinese(64,0,3);/*"Êó∂",3*/
+	OLED_ShowChinese(80,0,4);/*"Êï∞",4*/
+	OLED_ShowChinese(96,0,5);/*"ÊçÆ",5*/
 	
-	OLED_ShowChinese(8,4,2);/*" µ",7*/
-	OLED_ShowChinese(24,4,3);/*" ±",8*/
-	OLED_ShowChinese(40,4,6);/*"Œ¬",0*/
-	OLED_ShowChinese(56,4,8);/*"∂»",2*/
+	OLED_ShowChinese(8,4,2);/*"ÂÆû",7*/
+	OLED_ShowChinese(24,4,3);/*"Êó∂",8*/
+	OLED_ShowChinese(40,4,6);/*"Ê∏©",0*/
+	OLED_ShowChinese(56,4,8);/*"Â∫¶",2*/
 	OLED_ShowChar(72,4,':',16);
-	OLED_ShowChinese(8,6,2);/*" µ",7*/
-	OLED_ShowChinese(24,6,3);/*" ±",8*/
-	OLED_ShowChinese(40,6,7);/*" ™",1*/
-	OLED_ShowChinese(56,6,8);/*"∂»",2*/
+	OLED_ShowChinese(8,6,2);/*"ÂÆû",7*/
+	OLED_ShowChinese(24,6,3);/*"Êó∂",8*/
+	OLED_ShowChinese(40,6,7);/*"Êπø",1*/
+	OLED_ShowChinese(56,6,8);/*"Â∫¶",2*/
 	OLED_ShowChar(72,6,':',16);
   /* USER CODE END 2 */
 
@@ -156,19 +148,9 @@ int main(void)
 		Decimal_Value_Humi = Humidity_Value&0xff;
 		
 		printf("==========================\r\n");
-		printf(" µ ±Œ¬∂»Œ™£∫%d.%dC\r\n",Integer_Value_Temp,Decimal_Value_Temp);
-		printf(" µ ± ™∂»Œ™£∫%d.%d%%\r\n",Integer_Value_Humi,Decimal_Value_Humi);
+		printf("ÂÆûÊó∂Ê∏©Â∫¶‰∏∫Ôºö%d.%dC\r\n",Integer_Value_Temp,Decimal_Value_Temp);
+		printf("ÂÆûÊó∂ÊπøÂ∫¶‰∏∫Ôºö%d.%d%%\r\n",Integer_Value_Humi,Decimal_Value_Humi);
 		printf("==========================\r\n");
-		
-//		Deposit_value_1[i] = (int)Integer_Value_Temp/10;
-//		Deposit_value_1[i+1] = (int)Integer_Value_Temp%10;
-//		
-//		Deposit_value_2[i] = (int)Decimal_Value_Temp;
-//		
-//		Deposit_value_3[i] = (int)Integer_Value_Humi/10;
-//		Deposit_value_3[i+1] = (int)Integer_Value_Humi%10;
-//		
-//		Deposit_value_4[i] = (int)Decimal_Value_Humi;
 		
 		switch(Chr_cmd)
 		{
@@ -190,31 +172,16 @@ int main(void)
 				OLED_WR_CMD(0x01);
 				OLED_WR_CMD(0x00);
 				OLED_WR_CMD(0x04);
-	
-//				OLED_ShowString(12,4,"Temp",16);
-//				OLED_ShowChar(44,4,':',16);
-//				
-//				OLED_ShowString(12,6,"Humi",16);
-//				OLED_ShowChar(44,6,':',16);
-//			
-//				OLED_ShowNum(52,4,Integer_Value_Temp,2,16);
-//				OLED_ShowChar(68,4,'.',16);
-//				OLED_ShowNum(76,4,Decimal_Value_Temp,1,16);
-//				OLED_ShowChar(84,4,'C',16);
-//				OLED_ShowNum(52,6,Integer_Value_Humi,2,16);
-//				OLED_ShowChar(68,6,'.',16);
-//				OLED_ShowNum(76,6,Decimal_Value_Humi,1,16);
-//				OLED_ShowChar(84,6,'%',16);
-			
-				OLED_ShowChinese(8,2,2);/*" µ",7*/
-				OLED_ShowChinese(24,2,3);/*" ±",8*/
-				OLED_ShowChinese(40,2,6);/*"Œ¬",0*/
-				OLED_ShowChinese(56,2,8);/*"∂»",2*/
+
+				OLED_ShowChinese(8,2,2);/*"ÂÆû",7*/
+				OLED_ShowChinese(24,2,3);/*"Êó∂",8*/
+				OLED_ShowChinese(40,2,6);/*"Ê∏©",0*/
+				OLED_ShowChinese(56,2,8);/*"Â∫¶",2*/
 				OLED_ShowChar(72,2,':',16);
-				OLED_ShowChinese(8,6,2);/*" µ",7*/
-				OLED_ShowChinese(24,6,3);/*" ±",8*/
-				OLED_ShowChinese(40,6,7);/*" ™",1*/
-				OLED_ShowChinese(56,6,8);/*"∂»",2*/
+				OLED_ShowChinese(8,6,2);/*"ÂÆû",7*/
+				OLED_ShowChinese(24,6,3);/*"Êó∂",8*/
+				OLED_ShowChinese(40,6,7);/*"Êπø",1*/
+				OLED_ShowChinese(56,6,8);/*"Â∫¶",2*/
 				OLED_ShowChar(72,6,':',16);
 	
 				OLED_ShowNum(80,2,Integer_Value_Temp,2,16);
@@ -225,19 +192,8 @@ int main(void)
 				OLED_ShowChar(96,6,'.',16);
 				OLED_ShowNum(104,6,Decimal_Value_Humi,1,16);
 				OLED_ShowChar(112,6,'%',16);
-	
-//				OLED_ShowChar(72,4,Deposit_value_1[j],16);
-//				OLED_ShowChar(80,4,Deposit_value_1[j+1],16);
-//				OLED_ShowChar(88,4,'.',16);
-//				OLED_ShowChar(96,4,Deposit_value_2[j],16);
-//				OLED_ShowChar(104,4,'C',16);
-//				OLED_ShowChar(72,6,Deposit_value_3[j],16);
-//				OLED_ShowChar(80,6,Deposit_value_3[j+1],16);
-//				OLED_ShowChar(88,6,'.',16);
-//				OLED_ShowChar(96,4,Deposit_value_4[j],16);
-//				OLED_ShowChar(104,6,'%',16);
-	
-				OLED_WR_CMD(0x2F);//ø™∆Ùπˆ∂Ø
+				
+				OLED_WR_CMD(0x2F);//ÂºÄÂêØÊªöÂä®
 				
 				HAL_Delay(6000);
 			break;
@@ -298,7 +254,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
 	if(huart->Instance == USART1)
 	{
-		HAL_UART_Receive_IT(huart,rxBuffer,RX_CMD_LEN);//‘Ÿ¥ŒΩ” ’
+		HAL_UART_Receive_IT(huart,rxBuffer,RX_CMD_LEN);//ÂÜçÊ¨°Êé•Êî∂
 	}
 }
 
